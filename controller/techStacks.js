@@ -4,8 +4,6 @@ let techStacks = {}
 
 // GET ALL albums data
 techStacks.getAll = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const result = req.db.get('techStacks').value()
     
     console.log('Result : ', JSON.stringify(result))
@@ -14,8 +12,6 @@ techStacks.getAll = (req, res)=>{
 
 // GET techStacks data BY ID
 techStacks.getByID = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const result = req.db
         .get('techStacks')
         .find({ id : req.params.id })
@@ -32,8 +28,6 @@ techStacks.getByID = (req, res)=>{
 
 // Insert data to db
 techStacks.insert = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const data = {
         id          : shortid.generate(),
         title       : req.body.title,
@@ -52,8 +46,6 @@ techStacks.insert = (req, res)=>{
 
 // Validation : data should contain title, description, & url
 techStacks.midValidate = (req, res, next)=>{
-    console.log(req.method, req.url)
-    
     let { title, description, url } = req.body
     if( !title || !description || !url ){
         res.status(400).send('<pre> 400 Bad Request! </pre>')
@@ -64,8 +56,6 @@ techStacks.midValidate = (req, res, next)=>{
 
 // Delete data
 techStacks.delete = (req, res)=>{
-    console.log(req.method, req.url)
-
     const result = req.db.get('techStacks').remove({ id : req.params.id }).write()
 
     if(result){
@@ -78,8 +68,6 @@ techStacks.delete = (req, res)=>{
 
 // Patch data
 techStacks.patch = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const data = {}
     if( req.body.title          ) data.title        = req.body.title
     if( req.body.description    ) data.description  = req.body.description
@@ -96,8 +84,6 @@ techStacks.patch = (req, res)=>{
 
 // Put data to db
 techStacks.put = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const data = {
         title       : req.body.title,
         description : req.body.description, 

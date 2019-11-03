@@ -5,5 +5,6 @@ module.exports = {
     cors        : require('cors'),
     fileParser  : require('express-fileupload'),
     notFound    : require('./404'),
-    db          : require('./db')
+    db          : require('./db'),
+    reqIn       : require('./reqIn')
 }

@@ -4,8 +4,6 @@ let albums = {}
 
 // GET ALL albums data
 albums.getAll = (req, res)=>{
-    console.log('GET ', req.url)
-    
     const result = req.db.get('albums').value()
     
     console.log('Result : ', JSON.stringify(result))
@@ -14,8 +12,6 @@ albums.getAll = (req, res)=>{
 
 // GET albums data BY ID
 albums.getByID = (req, res)=>{
-    console.log('GET ', req.url)
-    
     const result = req.db
         .get('albums')
         .find({ id : req.params.id })
@@ -32,8 +28,6 @@ albums.getByID = (req, res)=>{
 
 // Insert data to db
 albums.insert = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const data = {
         id      : shortid.generate(),
         title   : req.body.title,
@@ -53,8 +47,6 @@ albums.insert = (req, res)=>{
 
 // Validation : data should contain title, artist, url, & image
 albums.midValidate = (req, res, next)=>{
-    console.log(req.method, req.url)
-    
     let { title, artist, url } = req.body
     if( !title || !artist || !url ){
         res.status(400).send('<pre> 400 Bad Request! </pre>')
@@ -65,8 +57,6 @@ albums.midValidate = (req, res, next)=>{
 
 // Upload image
 albums.midUpload = (req, res, next)=>{
-    console.log(req.method, req.url)
-    
     if(req.files && req.files.image){
         let photo       = req.files.image
         let photoName   = photo.name
@@ -86,8 +76,6 @@ albums.midUpload = (req, res, next)=>{
 
 // Delete data
 albums.delete = (req, res)=>{
-    console.log(req.method, req.url)
-
     const result = req.db.get('albums').remove({ id : req.params.id }).write()
 
     if(result){
@@ -100,8 +88,6 @@ albums.delete = (req, res)=>{
 
 // Patch data
 albums.patch = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const data = {}
     if( req.body.title  ) data.title    = req.body.title
     if( req.body.artist ) data.artist   = req.body.artist
@@ -119,8 +105,6 @@ albums.patch = (req, res)=>{
 
 // Put data to db
 albums.put = (req, res)=>{
-    console.log(req.method, req.url)
-    
     const data = {
         title   : req.body.title,
         artist  : req.body.artist, 
