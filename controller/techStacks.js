@@ -99,4 +99,14 @@ techStacks.put = (req, res)=>{
     }
 }
 
+// Check whether ID exists
+techStacks.midIsExist = (req, res, next)=>{
+    const data = req.db.get('techStacks').find({ id : req.params.id }).value()
+    if(data){
+        next()
+    } else {
+        res.status(404).send('<pre> 404 Not Found! </pre>')
+    }
+}
+
 module.exports = techStacks
