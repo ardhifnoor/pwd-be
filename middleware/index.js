@@ -1,7 +1,8 @@
 // Middleware(s)
 
 module.exports = {
-    notFound    : require('./404'),
     bodyParser  : require('body-parser'),
-    cors        : require('cors')
+    cors        : require('cors'),
+    notFound    : require('./404'),
+    db          : require('./db')
 }
