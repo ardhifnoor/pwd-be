@@ -6,9 +6,7 @@ let albums = {}
 albums.getAll = (req, res)=>{
     console.log('GET ', req.url)
     
-    const result = req.db
-        .get('albums')
-        .value()
+    const result = req.db.get('albums').value()
     
     console.log('Result : ', JSON.stringify(result))
     res.send(result)
@@ -130,7 +128,7 @@ albums.put = (req, res)=>{
         image   : req.body.image
     }
 
-    const result = req.db.get('albums').push(data).write()
+    const result = req.db.get('albums').find({ id : req.params.id }).assign(data).write()
     if(result){
         console.log('Result : ', JSON.stringify(data))
         res.send(data)
