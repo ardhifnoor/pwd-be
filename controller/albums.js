@@ -46,7 +46,7 @@ albums.insert = (req, res)=>{
 
     const result = req.db.get('albums').push(data).write()
     if(result){
-        console.log('Result : ', JSON.stringify(result))
+        console.log('Result : ', JSON.stringify(data))
         res.send(data)
     } else {
         res.status(500).send('<pre> 500 Error </pre>')
@@ -83,6 +83,20 @@ albums.midUpload = (req, res, next)=>{
         })
     } else {
         next()
+    }
+}
+
+// Delete data
+albums.delete = (req, res)=>{
+    console.log(req.method, req.url)
+
+    const result = req.db.get('albums').remove({ id : req.params.id }).write()
+
+    if(result){
+        console.log('Result : ', JSON.stringify(result))
+        res.send(result)
+    } else {
+        res.status(500).send('<pre> 500 Error </pre>')
     }
 }
 

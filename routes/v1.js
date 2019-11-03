@@ -8,5 +8,6 @@ const albumsController  = require('../controller/albums')
 Router.get('/albums', albumsController.getAll)
 Router.get('/albums/:id', albumsController.getByID)
 Router.post('/albums/', [albumsController.midValidate, albumsController.midUpload], albumsController.insert)
+Router.delete('/albums/:id', albumsController.delete)
 
 module.exports = Router
