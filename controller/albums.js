@@ -79,8 +79,8 @@ albums.delete = (req, res)=>{
     const result = req.db.get('albums').remove({ id : req.params.id }).write()
 
     if(result){
-        console.log('Result : ', JSON.stringify(result))
-        res.send(result)
+        console.log('Result : ', JSON.stringify(result[0]))
+        res.send(result[0])
     } else {
         res.status(500).send('<pre> 500 Error </pre>')
     }
