@@ -119,4 +119,24 @@ albums.patch = (req, res)=>{
     }
 }
 
+// Put data to db
+albums.put = (req, res)=>{
+    console.log(req.method, req.url)
+    
+    const data = {
+        title   : req.body.title,
+        artist  : req.body.artist, 
+        url     : req.body.url,
+        image   : req.body.image
+    }
+
+    const result = req.db.get('albums').push(data).write()
+    if(result){
+        console.log('Result : ', JSON.stringify(data))
+        res.send(data)
+    } else {
+        res.status(500).send('<pre> 500 Error </pre>')
+    }
+}
+
 module.exports = albums
