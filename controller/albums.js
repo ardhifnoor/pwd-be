@@ -69,7 +69,7 @@ albums.midValidate = (req, res, next)=>{
 albums.midUpload = (req, res, next)=>{
     console.log(req.method, req.url)
     
-    if(req.files.image){
+    if(req.files && req.files.image){
         let photo       = req.files.image
         let photoName   = photo.name
         
@@ -95,6 +95,25 @@ albums.delete = (req, res)=>{
     if(result){
         console.log('Result : ', JSON.stringify(result))
         res.send(result)
+    } else {
+        res.status(500).send('<pre> 500 Error </pre>')
+    }
+}
+
+// Patch data
+albums.patch = (req, res)=>{
+    console.log(req.method, req.url)
+    
+    const data = {}
+    if( req.body.title  ) data.title    = req.body.title
+    if( req.body.artist ) data.artist   = req.body.artist
+    if( req.body.url    ) data.url      = req.body.url
+    if( req.body.image  ) data.image    = req.body.image
+
+    const result = req.db.get('albums').find({ id : req.params.id }).assign(data).write()
+    if(result){
+        console.log('Result : ', JSON.stringify(data))
+        res.send(data)
     } else {
         res.status(500).send('<pre> 500 Error </pre>')
     }
