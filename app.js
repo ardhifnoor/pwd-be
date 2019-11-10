@@ -14,6 +14,10 @@ app.use(middleware.fileParser())
 app.use(middleware.db)
 app.use(middleware.reqIn)
 
+// Expose public folder
+app.use('/public', express.static('public'))
+
+// API Routing
 app.use('/v1', routes.v1)
 
 app.use(middleware.notFound)

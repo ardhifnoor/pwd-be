@@ -65,7 +65,7 @@ albums.midUpload = (req, res, next)=>{
             if(err){
                 console.log('ERROR Cannot upload file!')
             } else {
-                req.body.image = '/public/' + photoName
+                req.body.image = req.currentHost + '/public/' + photoName
             }
             next()
         })
